@@ -1,3 +1,8 @@
+// Nancy Li
+// APCS1 pd9
+// HW45 -- Come Together
+// 2015-12-10
+
 public class Binary implements Comparable{
 
     protected int _decNum;

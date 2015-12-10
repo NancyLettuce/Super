@@ -1,5 +1,9 @@
-public class Hexadecimal implements Comparable
-{
+// Nancy Li
+// APCS1 pd9
+// HW45 -- Come Together
+// 2015-12-10
+
+public class Hexadecimal implements Comparable{
     protected int _decNum;
     private String _binNum;
     private final static String HEXDIGITS = "0123456789ABCDEF";
