@@ -1,7 +1,6 @@
-
-public class Hexadecimal
+public class Hexadecimal implements Comparable
 {
-    private int _decNum;
+    protected int _decNum;
     private String _binNum;
     private final static String HEXDIGITS = "0123456789ABCDEF";
 
@@ -61,7 +60,7 @@ public class Hexadecimal
 		    //goes through each char in string s
 		    //returns corresponding index of char in string HEXDIGITS
 		    * Math.pow(16, power));//number multiplied by 16 raised to th correct power
-	}
+		    }
 	return dec;
     }
 
@@ -94,16 +93,51 @@ public class Hexadecimal
         return compareTo((Hexadecimal)other) == 0;
     }
 
+	public int getValue () {
+		return binToDec(_binNum); }
  
-    public int compareTo(Hexadecimal other)
-    {
-        if (!(other instanceof Hexadecimal))
-            throw new ClassCastException("compareTo() input not a Binary");
-        if (_decNum == other._decNum) return 0;
-        if (_decNum <  other._decNum) return -1;
-        return 1;
+    public int compareTo(Object o){
+		if (!(o instanceof Comparable)) {
+        	throw new ClassCastException("Argument to compareTo is not " + 
+              "an instanceof Comparable");
+      	}
+      	if (o == null) {
+	        throw new NullPointerException ("Nothing in Object");
+      	}
+	if (o instanceof Binary) {
+		Binary please = new Binary(this._decNum);
+	    Binary other = (Binary)o; //Object other becomes Binary o
+	    //checks for equality of variables
+	    if (please.getValue() == other.getValue()) {
+		return 0; }
+	    else if (please.getValue() < other.getValue()) {
+		return -1;}
+	    return 1;
+	}
+	else if (o instanceof Hexadecimal) {
+	    Hexadecimal please = new Hexadecimal(this._decNum);
+	    Hexadecimal other = (Hexadecimal)o;
+	    if (please.getValue() == other.getValue()) {
+		return 0;
+	    }
+	    else if (please.getValue() < other.getValue()) {
+		return -1;
+	    }
+	    return 1;
+	}
+    else {
+        Rational other = (Rational) o;
+        if (other.getNum() % other.getDem() != 0){
+          return -1;
+        }
+        else{
+          Binary otherB = new Binary (other.getNum() / other.getDem());
+          if (this._decNum == otherB._decNum) {
+            return 0;}
+            return -1;
+        }
+      }
     }
-
  
     public static void main(String[] args)
 
